@@ -1,0 +1,11 @@
+#signupModalButton {
+    background-color: rgb(28, 139, 28); 
+    color: white;             
+    border: none;             
+}
+
+#loginModalButton {
+    /* background-color: #7D9BFF;  */
+    color: white;             
+    border: none;             
+}
