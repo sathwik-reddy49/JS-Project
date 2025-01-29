@@ -1,11 +1,162 @@
-#signupModalButton {
-    background-color: rgb(28, 139, 28); 
-    color: white;             
-    border: none;             
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  overflow-x: hidden;
+}
+
+body {
+  background-image: url('maria-sol-ponce-FliC0KecSw0-unsplash.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  font-family: 'math';
+  position: relative;
+  word-spacing: 0.1em;
+}
+
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('maria-sol-ponce-FliC0KecSw0-unsplash.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  filter: blur(11px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 1060;
+}
+
+.navbar-nav {
+  margin-left: auto;
+}
+
+.navbar-nav .nav-link {
+  font-size: 1.2rem;
+  margin-right: 1.5rem;
+  color: #000;
+}
+
+.navbar-nav .nav-link:hover {
+  color: dimgray;
 }
 
 #loginModalButton {
-    /* background-color: #7D9BFF;  */
-    color: white;             
-    border: none;             
+  background-color: inherit;
+  color: #000000;
+  /* border: 1px solid grey; */
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  font-weight: 600;
+}
+
+#loginModalButton:hover {
+  color: dimgray;
+}
+
+#signupModalButton {
+  background-color: rgb(28, 29, 28);
+  border: none;
+  padding: 0.8rem 1rem;
+  border-radius: 1.3rem;
+}
+
+#signupModalButton:hover {
+  background-color: rgb(66, 63, 63);
+  /* color: #000; */
+  border: none;
+  /* font-weight: 600; */
+}
+
+.btn {
+  background-color: rgb(28, 29, 28);
+  border: none;
+  padding: 0.8rem;
+  border-radius: 1rem;
+}
+
+/* .modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+}
+
+.modal {
+  background: none;
+  z-index: 1050;
+}
+
+.modal-dialog {
+  margin-top: 9vh;
+} */
+
+.play-now-container {
+  height: calc(100vh - 75px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+}
+
+.play-now-btn {
+  background-color: #e19a0d;
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.play-now-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+#about{
+  background-color: #f0f0f0;
+}
+
+#about #about-paragraph-2{
+  font-size: 1.1rem;
+}
+
+#rules{
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 2.5rem;
+}
+
+#how-to-play{
+  background-color: #f0f0f0;
+}
+
+#how-to-play p{
+  font-size: 1.1rem;
+}
+
+#features{
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 2.5rem;
+}
+
+#testimonials{
+  background-color: #f0f0f0;
 }
