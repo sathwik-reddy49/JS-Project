@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="background-container"></div>
-    <!-- Navbar -->
+    <!-- RECHECK : Navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <!-- Nav-Left -->
@@ -43,81 +43,102 @@
 
             <!-- Nav-Right -->
             <form class="d-flex mx-2" role="search">
-                <!-- Login Button -->
-                <button type="button" id="loginModalButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+              <!-- Login Button -->
+              <button type="button" id="loginModalButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
                   Login
-                </button>
+              </button>
 
-                <!-- Login Modal -->
-                <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h1 class="modal-title fs-5 text-center w-100" id="loginModalLabel">Login Form</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <form>
-                          <label for="login-email">Email</label>
-                          <input type="email" id="login-email" name="email" required class="form-control mb-3">
+              <!-- Login Modal -->
+              <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5 text-center w-100" id="loginModalLabel">Login Form</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" name="email" required class="form-control mb-3">
 
-                          <label for="login-password">Password:</label>
-                          <input type="password" id="login-password" name="password" required class="form-control mb-3">
+                        <label for="login-password">Password:</label>
+                        <input type="password" id="login-password" name="password" required class="form-control mb-3">
 
-                          <button type="button" id="loginButton" class="btn btn-primary d-block mx-auto w-50">Login</button>
-                        </form>
-                      </div>
+                        <button type="button" id="loginButton" class="btn btn-primary d-block mx-auto w-50">Login</button>
+                      </form>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <!-- Signup Button -->
-                <button type="button" id="signupModalButton" class="btn btn-secondary me-3" data-bs-toggle="modal" data-bs-target="#signupModal">
-                  Sign Up
-                </button>
+              <!-- Signup Button -->
+              <button type="button" id="signupModalButton" class="btn btn-secondary me-3" data-bs-toggle="modal" data-bs-target="#signupModal">
+                Sign Up
+              </button>
 
-                <!-- Signup Modal -->
-                <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h1 class="modal-title fs-5 text-center w-100" id="signupModalLabel">Sign Up Form</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <form id="signupForm">
-                          <label for="signup-name">Name:</label>
-                          <input type="text" id="signup-name" name="name" required class="form-control mb-3">
+              <!-- Signup Modal -->
+              <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5 text-center w-100" id="signupModalLabel">Sign Up Form</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form id="signupForm">
+                        <label for="signup-name">Name:</label>
+                        <input type="text" id="signup-name" name="name" required class="form-control mb-3">
 
-                          <label for="signup-email">Email:</label>
-                          <input type="email" id="signup-email" name="email" required class="form-control mb-3">
+                        <label for="signup-email">Email:</label>
+                        <input type="email" id="signup-email" name="email" required class="form-control mb-3">
 
-                          <label for="signup-password">Password:</label>
-                          <input type="password" id="signup-password" name="password" required class="form-control mb-3">
+                        <label for="signup-password">Password:</label>
+                        <input type="password" id="signup-password" name="password" required class="form-control mb-3">
 
-                          <label for="signup-confirm-password">Confirm Password:</label>
-                          <input type="password" id="signup-confirm-password" name="confirm-password" required class="form-control mb-3">
+                        <label for="signup-confirm-password">Confirm Password:</label>
+                        <input type="password" id="signup-confirm-password" name="confirm-password" required class="form-control mb-3">
                           
-                          <button type="button" id="signupButton" class="btn btn-success d-block mx-auto w-50">Sign Up</button>
-                        </form>
-                      </div>
+                        <button type="button" id="signupButton" class="btn btn-success d-block mx-auto w-50">Sign Up</button>
+                      </form>
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <!-- Profile Button (Initially Hidden) -->
+              <button id="profileButton" class="btn btn-secondary d-none" data-bs-toggle="offcanvas" data-bs-target="#profileOffcanvas">
+                Welcome, User
+              </button>
             </form>
           </div>
         </div>
-      </nav>
-    
-    <!-- Game Body -->
+    </nav>
+
+    <!-- RECHECK : Offcanvas for User Profile -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="profileOffcanvas" aria-labelledby="profileOffcanvasLabel">
+      <div class="offcanvas-header">
+        <h5 id="profileOffcanvasLabel">User Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body my-3">
+        <!-- Profile Content -->
+        <p id="userName">Name: </p>
+        <p id="userEmail">Email: </p>
+        <!-- You can add more profile fields here -->
+        <button class="btn btn-danger" id="logoutButton">Logout</button>
+      </div>
+    </div>
+
+    <!-- RECHECK : Game Body -->
     <div class="play-now-container">
       <div class="centered-text">
         <h1>Welcome to the Matching Cards Game</h1>
         <h5 class="mb-3">Challenge your memory and match all the cards to win!</h5>
-        <button class="play-now-btn" onclick="startGame()">Play Now</button>
+        <button class="play-now-btn" id="playNowButton">Play Now</button>
       </div>
     </div>
-    <!-- About Section -->
+
+    <!-- RECHECK : About Section -->
     <section id="about" class="py-5">
       <div class="container text-center">
         <h2 class="mb-4">About the Game</h2>
@@ -133,7 +154,7 @@
       </div>
     </section>
 
-    <!-- Rules Section -->
+    <!-- RECHECK : Rules Section -->
     <section id="rules" class="py-5">
       <div class="container text-center">
         <h2 class="mb-4">Rules</h2>
@@ -147,7 +168,7 @@
       </div>
     </section>
 
-    <!-- How to Play Section -->
+    <!-- RECHECK : How to Play Section -->
     <section id="how-to-play" class="py-5">
       <div class="container text-center">
         <h2 class="mb-4">How to Play</h2>
@@ -168,7 +189,7 @@
       </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- RECHECK : Features Section -->
     <section id="features" class="py-5">
       <div class="container text-center">
         <h2 class="mb-4">Features</h2>
@@ -193,7 +214,7 @@
       </div>
     </section>
 
-    <!-- Testimonials Section -->
+    <!-- RECHECK : Testimonials Section -->
     <section id="testimonials" class="py-5">
       <div class="container text-center">
         <h2 class="mb-4">What People Are Saying</h2>
@@ -220,7 +241,7 @@
       </div>
     </section>
 
-    <!-- Footer -->
+    <!-- RECHECK : Footer -->
     <footer class="py-4 bg-dark text-white text-center">
       <p>&copy; 2025 Matching Cards Game. All rights reserved.</p>
       <p>
@@ -228,7 +249,6 @@
         <a href="#" class="text-white">Terms of Service</a>
       </p>
     </footer>
-
 
     <!-- Script connections -->
     <script type="module" src="JS Project.js"></script>
