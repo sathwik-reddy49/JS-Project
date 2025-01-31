@@ -13,6 +13,7 @@ body {
   font-family: 'math';
   position: relative;
   word-spacing: 0.1em;
+  overflow-x: hidden;
 }
 
 .background-container {

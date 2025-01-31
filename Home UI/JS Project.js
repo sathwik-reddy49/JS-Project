@@ -43,10 +43,8 @@ onAuthStateChanged(auth, (user) => {
         
     } else {
         console.log("No user logged in.");
-        
         signupModalButton.style.display = 'block';
         loginModalButton.style.display = 'block';
-        
         profileButton.classList.add('d-none');
     }
 });
@@ -103,13 +101,23 @@ document.getElementById("signupButton").addEventListener("click", async () => {
             });
         });
     } catch (err) {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: err.message || "Something went wrong! Please try again later.",
-        }).then(() => {
-            signupModal.show();
-        });
+        if(err.message === "Firebase: Error (auth/email-already-in-use)."){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Email already in use. Please try again!",
+            }).then(() => {
+                signupModal.show();
+            });
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: err.message || "Something went wrong! Please try again later.",
+            }).then(() => {
+                signupModal.show();
+            });
+        }
     }
 });
 
@@ -141,7 +149,10 @@ document.getElementById("loginButton").addEventListener("click", async () => {
             }).then(() => {
                 document.getElementById("login-email").value = "";
                 document.getElementById("login-password").value = "";
-                // loginModal.hide();
+                profileButton.classList.remove('d-none');
+                profileButton.textContent = `${user.displayName}`;
+                userNameText.textContent = `Name: ${user.displayName}`;
+                userEmailText.textContent = `Email: ${user.email}`;
             });
         });
     } catch (err) {
@@ -179,7 +190,7 @@ playButton.addEventListener("click", () => {
             loginModal.show();
         });
     } else {
-        location.href = "./game.html";
+        location.href = "game.html";
     }
 });
 
