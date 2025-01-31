@@ -190,7 +190,7 @@ playButton.addEventListener("click", () => {
             loginModal.show();
         });
     } else {
-        location.href = "game.html";
+        location.href = "./Game_UI/Game.html";
     }
 });
 
