@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
 import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, query, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAZAV3GyV2_64_8-dfTOqciZgLG98f4Efk",
@@ -14,6 +15,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 // RECHECK : Check if user is logged in
 onAuthStateChanged(auth, (user) => {
@@ -28,6 +30,8 @@ onAuthStateChanged(auth, (user) => {
         }).then(() => {
             window.location.href = "../Home_UI/index.html";
         });
+    } else {
+        fetchScores(user.uid);
     }
 });
 
@@ -52,7 +56,6 @@ document.getElementById("logoutButton").addEventListener("click", async () => {
 let attempts = 0;
 let matches = 0;
 let timer = 0;
-let highScore = localStorage.getItem("highScore") || 0;
 let interval;
 let gamePaused = false;
 
@@ -60,11 +63,16 @@ const attemptsText = document.getElementById("attempts");
 const matchesText = document.getElementById("matches");
 const timeText = document.getElementById("time");
 const highScoreText = document.getElementById("highScore");
+const previousScoresText = document.getElementById("previousScores");
 const pauseGameButton = document.getElementById("pauseGame");
 const resetGameButton = document.getElementById("resetGame");
 const gameBoard = document.querySelector(".game-board");
 
-let cards = ["🐶", "🐶", "🐱", "🐱", "🦊", "🦊", "🐸", "🐸", "🐵", "🐵", "🐼", "🐼"];
+let cards = [
+    "🐶", "🐶", "🐱", "🐱", "🦊", "🦊", "🐸", "🐸",
+    "🐵", "🐵", "🐼", "🐼", "🐯", "🐯", "🦁", "🦁",
+    "🐰", "🐰", "🐨", "🐨"
+];
 let shuffledCards = shuffleArray(cards);
 let flippedCards = [];
 
@@ -122,20 +130,61 @@ function checkMatch() {
     checkWin();
 }
 
-// RECHECK : Win Condition
+// RECHECK : Store score in Firestore
+async function storeScore(userId) {
+    await addDoc(collection(db, "scores"), {
+        userId,
+        attempts,
+        timestamp: new Date()
+    });
+}
+
+// RECHECK : Fetch last three scores from Firestore
+async function fetchScores(userId) {
+    try {
+        const q = query(
+            collection(db, "scores"),
+            orderBy("timestamp", "desc"),
+            limit(3)
+        );
+
+        // Filter scores to only show scores for the logged-in user
+        const querySnapshot = await getDocs(q);
+
+        let scoresHtml = "<strong>Last Scores:</strong><br>";
+        let count = 0;
+
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data.userId === userId && count < 3) {  // Check if score belongs to the logged-in user
+                scoresHtml += `🕹️ Attempts: ${data.attempts} <br>`;
+                count++;
+            }
+        });
+
+        if (count === 0) {
+            scoresHtml = "<p>No previous scores found.</p>";
+        }
+
+        previousScoresText.innerHTML = scoresHtml;
+
+    } catch (error) {
+        console.error("Error fetching scores:", error);
+        previousScoresText.innerHTML = "<p>Error loading scores.</p>";
+    }
+}
+
+
+// RECHECK : Check Win Condition
 function checkWin() {
     if (document.querySelectorAll(".matched").length === cards.length) {
         clearInterval(interval);
-        if (attempts < highScore || highScore === 0) {
-            highScore = attempts;
-            localStorage.setItem("highScore", highScore);
-            highScoreText.textContent = `High Score: ${highScore}`;
-        }
+        storeScore(auth.currentUser.uid);
         setTimeout(() => Swal.fire("Congratulations! You won!"), 300);
     }
 }
 
-// RECHECK : Timer Function
+// RECHECK : Reset Timer Function
 function resetTimer() {
     clearInterval(interval);
     timer = 0;
@@ -148,24 +197,36 @@ function resetTimer() {
 
 // RECHECK : Pause Button Event Listener
 pauseGameButton.addEventListener("click", () => {
-    gamePaused = !gamePaused;
-    if (gamePaused) {
+    if (!gamePaused) {
         clearInterval(interval);
         pauseGameButton.textContent = "Resume Game";
     } else {
-        resetTimer();
+        interval = setInterval(() => {
+            timer++;
+            timeText.textContent = `Time: ${timer}`;
+        }, 1000);
         pauseGameButton.textContent = "Pause Game";
     }
+    gamePaused = !gamePaused;
 });
 
 // RECHECK : Reset Button Event Listener
 resetGameButton.addEventListener("click", () => {
+    clearInterval(interval);
+
     attempts = 0;
     matches = 0;
+    timer = 0;
+    gamePaused = false;
+
     attemptsText.textContent = "Attempts: 0";
     matchesText.textContent = "Matches: 0";
+    timeText.textContent = "Time: 0";
+    pauseGameButton.textContent = "Pause Game";
+
     shuffledCards = shuffleArray(cards);
     createBoard();
 });
+
 
 createBoard();

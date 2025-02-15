@@ -1,11 +1,11 @@
 body {
-    font-family: 'math';
+    font-family: 'Inter', sans-serif;
     text-align: center;
     background-color: #f4f4f4;
 }
 
-.container {
-    max-width: 600px;
+.game-container {
+    max-width: 90%;
     margin: 20px auto;
     background: white;
     padding: 20px;
@@ -13,39 +13,50 @@ body {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
+.game-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
 .game-board {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-top: 20px;
+    grid-template-rows: repeat(5, 1fr);
+    /* gap: 1rem; */
+    width: 32rem;
+    height: 38rem;
+    margin: auto;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 1rem;
 }
 
 .card {
-    width: 80px;
-    height: 80px;
-    background-color: #06ce1ab7;
-    color: white;
+    width: 100px;
+    height: 100px;
+    background-color: #2ea9ff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
+    font-size: 2rem;
+    color: #003366;
     border-radius: 10px;
-    transition: background 0.3s;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
 .card.flipped {
-    background-color: #28a745;
+    background-color: white;
 }
 
 .card.matched {
-    background-color: #ffc107;
-    pointer-events: none;
+    background-color: #28a745;
+    color: gray;
 }
 
 button {
-    margin-top: 10px;
     padding: 10px 20px;
     border: none;
     background-color: #dc3545;
@@ -57,4 +68,51 @@ button {
 
 button:hover {
     background-color: #c82333;
+}
+
+@media (max-width: 1024px) {
+    .game-board {
+        width: 28rem; /* 448px */
+        height: 34rem; /* 544px */
+    }
+    .card {
+        width: 6rem; /* 96px */
+        height: 6rem; /* 96px */
+    }
+}
+
+@media (max-width: 768px) {
+    .game-board {
+        width: 25rem; /* 400px */
+        height: 31rem; /* 496px */
+    }
+    .card {
+        width: 5rem; /* 80px */
+        height: 5rem; /* 80px */
+    }
+}
+
+@media (max-width: 480px) {
+    .game-board {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+        grid-template-rows: repeat(10, 1fr); /* 10 rows */
+        width: 19rem;
+        height: 38rem;
+    }
+
+    .card {
+        width: 4rem;
+        height: 4rem;
+        font-size: 2rem;
+    }
+
+    .game-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    button {
+        width: 100%;
+        padding: 1rem 2rem;
+    }
 }
