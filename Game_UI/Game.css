@@ -4,38 +4,54 @@ body {
     background-color: #f4f4f4;
 }
 
+.navbar-brand .title {
+    font-size: 1.5rem;
+}
+
+@media (max-width: 576px) {
+    .navbar-brand .title {
+        font-size: 1.2rem;
+    }
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+}
+
 .game-container {
-    max-width: 90%;
-    margin: 20px auto;
+    max-width: 100%;
+    margin: 10px auto;
     background: white;
-    padding: 20px;
+    padding: 15px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 .game-buttons {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 .game-board {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    /* gap: 1rem; */
-    width: 32rem;
-    height: 38rem;
-    margin: auto;
-    padding: 1rem;
+    gap: 10px;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    aspect-ratio: 4/5;
+    margin: 0 auto;
+    padding: 10px;
     background-color: white;
-    border-radius: 1rem;
+    border-radius: 10px;
 }
 
 .card {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
     background-color: #2ea9ff;
     display: flex;
     align-items: center;
@@ -53,7 +69,7 @@ body {
 
 .card.matched {
     background-color: #28a745;
-    color: gray;
+    color: white;
 }
 
 button {
@@ -70,49 +86,66 @@ button:hover {
     background-color: #c82333;
 }
 
-@media (max-width: 1024px) {
+/* Game stats container */
+.game-stats {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-stats p {
+    margin: 5px 0;
+}
+
+/* Responsive breakpoints - adjusts card size but keeps grid structure */
+@media (max-width: 1200px) {
     .game-board {
-        width: 28rem; /* 448px */
-        height: 34rem; /* 544px */
+        max-width: 450px;
     }
     .card {
-        width: 6rem; /* 96px */
-        height: 6rem; /* 96px */
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .game-board {
+        max-width: 400px;
+    }
+    .card {
+        font-size: 1.6rem;
     }
 }
 
 @media (max-width: 768px) {
     .game-board {
-        width: 25rem; /* 400px */
-        height: 31rem; /* 496px */
+        max-width: 350px;
     }
     .card {
-        width: 5rem; /* 80px */
-        height: 5rem; /* 80px */
+        font-size: 1.4rem;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
     .game-board {
-        grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
-        grid-template-rows: repeat(10, 1fr); /* 10 rows */
-        width: 19rem;
-        height: 38rem;
+        max-width: 300px;
     }
-
     .card {
-        width: 4rem;
-        height: 4rem;
-        font-size: 2rem;
+        font-size: 1.2rem;
     }
-
     .game-buttons {
         flex-direction: column;
-        gap: 1rem;
     }
-
-    button {
+    .game-buttons button {
         width: 100%;
-        padding: 1rem 2rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .game-board {
+        max-width: 250px;
+    }
+    .card {
+        font-size: 1rem;
     }
 }
