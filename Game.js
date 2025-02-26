@@ -28,7 +28,7 @@ onAuthStateChanged(auth, (user) => {
             icon: "warning",
             confirmButtonText: "OK"
         }).then(() => {
-            window.location.href = "../Home_UI/index.html";
+            window.location.href = "index.html";
         });
     } else {
         fetchScores(user.uid);
@@ -45,7 +45,7 @@ document.getElementById("logoutButton").addEventListener("click", async () => {
             icon: "warning",
             confirmButtonText: "OK"
         }).then(() => {
-            window.location.href = "../Home_UI/index.html";
+            window.location.href = "index.html";
         });
     } catch (error) {
         console.error("Error logging out:", error);
