@@ -20,15 +20,15 @@ const db = getFirestore(app);
 // RECHECK : Check if user is logged in
 onAuthStateChanged(auth, (user) => {
     if (!user) {
-        document.getElementById("navbar").style.display = "none";
-        document.getElementById("gameContainer").style.display = "none";
         Swal.fire({
             title: "Login Required!",
             text: "Please log in to play the game.",
             icon: "warning",
             confirmButtonText: "OK"
-        }).then(() => {
-            window.location.href = "index.html";
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "index.html";
+            }
         });
     } else {
         fetchScores(user.uid);
